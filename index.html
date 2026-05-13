@@ -4,22 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Ebrew — Day 16: Food Words</title>
-<meta name="theme-color" content="#7F77DD">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Ebrew">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.svg">
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('sw.js')
-      .then(r=>console.log('SW registered'))
-      .catch(e=>console.log('SW error',e));
-  });
-}
-</script>
 <style>
   :root {
     --purple-50:#EEEDFE;--purple-100:#CECBF6;--purple-200:#AFA9EC;
@@ -36,6 +20,28 @@ if('serviceWorker' in navigator){
   .app{width:100%;max-width:390px;}
   .screen{display:none;}.screen.active{display:block;}
 
+
+  /* HOME SCREEN */
+  .home-wrap{padding:8px 0 0;}
+  .home-logo{font-size:42px;font-weight:700;letter-spacing:-1px;color:var(--purple-400);margin-bottom:4px;text-align:center;}
+  .home-logo span{color:#2C2C2A;}
+  .home-tagline{font-size:13px;font-weight:500;color:var(--gray-400);text-align:center;margin-bottom:24px;letter-spacing:.02em;}
+  .home-tagline-heb{color:var(--purple-400);}
+  .home-hero{background:white;border:1px solid #E8E5DC;border-radius:var(--rxl);padding:24px 20px;margin-bottom:14px;text-align:center;}
+  .home-hero-emoji{font-size:36px;margin-bottom:12px;letter-spacing:4px;}
+  .home-hero-title{font-size:20px;font-weight:700;color:#2C2C2A;line-height:1.4;margin-bottom:10px;letter-spacing:-.3px;}
+  .home-hero-sub{font-size:13px;color:var(--gray-400);line-height:1.65;}
+  .home-program{background:white;border:1px solid #E8E5DC;border-radius:var(--rxl);padding:20px;margin-bottom:14px;}
+  .home-prog-title{font-size:13px;font-weight:600;color:#2C2C2A;margin-bottom:14px;}
+  .home-prog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+  .home-prog-item{display:flex;align-items:center;gap:7px;background:#F7F5F0;border-radius:var(--rm);padding:8px 10px;}
+  .hpi-icon{font-size:18px;flex-shrink:0;}
+  .hpi-text{font-size:12px;font-weight:500;color:#444441;}
+  .home-signup{background:white;border:1px solid #E8E5DC;border-radius:var(--rxl);padding:20px;margin-bottom:14px;}
+  .home-fine{font-size:12px;color:var(--gray-400);text-align:center;margin-top:10px;}
+  .home-link{color:var(--purple-400);cursor:pointer;font-weight:500;}
+  .home-link:hover{text-decoration:underline;}
+
   /* SHARED */
   .app-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
   .logo{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--purple-400);}
@@ -49,6 +55,13 @@ if('serviceWorker' in navigator){
   .ghost-btn{width:100%;padding:13px;background:white;border:1.5px solid #E8E5DC;border-radius:var(--rm);font-size:14px;font-family:var(--sans);font-weight:500;color:#444441;cursor:pointer;margin-top:8px;transition:background .15s;}
   .ghost-btn:hover{background:#F7F5F0;}
   .section-lbl{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--gray-400);margin-bottom:8px;}
+
+  .hint-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .hint-btn{background:var(--purple-50);border:1px solid var(--purple-200);border-radius:99px;padding:5px 16px;font-size:13px;font-weight:500;color:var(--purple-800);cursor:pointer;transition:background .12s;flex-shrink:0;}
+  .hint-btn:hover{background:var(--purple-100);}
+  .hint-reveal{font-size:15px;font-weight:600;color:var(--purple-600);direction:rtl;opacity:0;transition:opacity .3s;}
+  .hint-reveal.visible{opacity:1;}
+
   .progress-track{height:6px;background:#E8E5DC;border-radius:99px;margin-bottom:20px;overflow:hidden;}
   .progress-fill{height:6px;background:var(--purple-400);border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
 
@@ -119,6 +132,24 @@ if('serviceWorker' in navigator){
   .lr-status{font-size:16px;}
 
   /* CROSSWORD */
+
+  .cw-word-row{display:flex;align-items:center;gap:10px;padding:10px 14px;
+    background:white;border:1px solid #E8E5DC;border-radius:var(--rl);
+    margin-bottom:8px;transition:border-color .2s,background .2s;}
+  .cw-word-row.active-row{border-color:var(--purple-400);background:var(--purple-50);}
+  .cw-word-row.done-row{border-color:var(--green-600);background:var(--green-50);opacity:.75;}
+  .cw-row-emoji{font-size:28px;flex-shrink:0;width:36px;text-align:center;}
+  .cw-row-boxes{display:flex;direction:rtl;gap:4px;flex:1;flex-wrap:wrap;}
+  .cw-box{width:32px;height:38px;border:2px solid #E8E5DC;border-radius:7px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;direction:rtl;color:#2C2C2A;font-weight:700;
+    transition:border-color .15s,background .15s;}
+  .cw-box.filled{border-color:var(--purple-400);background:var(--purple-50);}
+  .cw-box.active{border-color:var(--teal-400);background:var(--teal-50);}
+  .cw-box.ok{border-color:var(--green-600);background:var(--green-50);color:var(--green-800);}
+  .cw-box.bad{border-color:var(--red-600);background:var(--red-50);}
+  .cw-row-num{font-size:11px;font-weight:700;color:var(--gray-400);width:16px;flex-shrink:0;text-align:center;}
+
   .cw-intro{text-align:center;margin-bottom:20px;}
   .cw-tag{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;background:var(--teal-50);color:var(--teal-800);border:1px solid #9FE1CB;border-radius:99px;padding:4px 12px;margin-bottom:8px;}
   .cw-title{font-size:22px;font-weight:700;color:#2C2C2A;margin-bottom:4px;}
@@ -179,8 +210,38 @@ if('serviceWorker' in navigator){
 <body>
 <div class="app">
 
+<!-- ══ HOME ══ -->
+<div id="s-home" class="screen active">
+  <div class="home-wrap">
+    <div class="home-logo">e<span>brew</span></div>
+    <div class="home-tagline">Hebrew for the summer<span class="home-tagline-heb"> · עברית לקיץ</span></div>
+    <div class="home-hero">
+      <div class="home-hero-emoji">📖✨🎯</div>
+      <div class="home-hero-title">30 days. 10 minutes a day.<br>Real Hebrew, real fun.</div>
+      <div class="home-hero-sub">Decode letters, learn words, play games — all in topics kids actually care about. No prayers. No school. Just Hebrew.</div>
+    </div>
+    <div class="home-program">
+      <div class="home-prog-title">What's in the program <span style="direction:rtl;font-weight:400;color:var(--purple-400)">· מה בתוכנית</span></div>
+      <div class="home-prog-grid">
+        <div class="home-prog-item"><span class="hpi-icon">🍕</span><span class="hpi-text">Food &amp; drinks</span></div>
+        <div class="home-prog-item"><span class="hpi-icon">⚽</span><span class="hpi-text">Sports</span></div>
+        <div class="home-prog-item"><span class="hpi-icon">🎬</span><span class="hpi-text">Movies &amp; pop</span></div>
+        <div class="home-prog-item"><span class="hpi-icon">🐉</span><span class="hpi-text">Animals</span></div>
+        <div class="home-prog-item"><span class="hpi-icon">🎮</span><span class="hpi-text">Games</span></div>
+        <div class="home-prog-item"><span class="hpi-icon">😎</span><span class="hpi-text">Feelings</span></div>
+      </div>
+    </div>
+    <div class="home-signup">
+      <div class="section-lbl">What's your name? <span style="direction:rtl;font-weight:400;font-size:11px;color:var(--purple-400)">מה שמך?</span></div>
+      <input class="name-input" id="home-name" placeholder="Enter your name" maxlength="12"/>
+      <button class="cta-btn" onclick="goDay16()">Start Day 1 — it's free →</button>
+      <div class="home-fine">Already on Day 16? <span class="home-link" onclick="goDay16()">Jump in →</span></div>
+    </div>
+  </div>
+</div>
+
 <!-- ══ INTRO ══ -->
-<div id="s-intro" class="screen active">
+<div id="s-intro" class="screen">
   <div class="app-header">
     <div class="logo">e<span>brew</span></div>
     <div class="streak-chip">🔥 3 day streak</div>
@@ -199,10 +260,8 @@ if('serviceWorker' in navigator){
     </div>
   </div>
   <div class="card" style="margin-bottom:14px;">
-    <div class="section-lbl" style="margin-bottom:8px;">What's your name?</div>
-    <input class="name-input" id="name-input" placeholder="Enter your name" maxlength="12"/>
-    <div class="section-lbl">Pick your companion</div>
-    <div class="char-grid">
+    <div class="section-lbl" style="display:none">Pick your companion</div>
+    <div class="char-grid" style="display:none">
       <button class="char-btn selected" onclick="selectChar(0)"><span class="char-emoji">🐉</span><span class="char-name">Dino</span><span class="char-heb">דינו</span></button>
       <button class="char-btn" onclick="selectChar(1)"><span class="char-emoji">🦊</span><span class="char-name">Foxi</span><span class="char-heb">פוקסי</span></button>
       <button class="char-btn" onclick="selectChar(2)"><span class="char-emoji">🦄</span><span class="char-name">Uni</span><span class="char-heb">יוני</span></button>
@@ -214,14 +273,14 @@ if('serviceWorker' in navigator){
     <div class="info-box"><div class="info-num">~10</div><div class="info-lbl">Minutes</div></div>
     <div class="info-box"><div class="info-num">16/30</div><div class="info-lbl">Day</div></div>
   </div>
-  <button class="cta-btn" onclick="startQuiz()">Start today's lesson →</button>
+  <button class="cta-btn" onclick="startQuiz()">Let's go! →</button>
 </div>
 
 <!-- ══ QUIZ ══ -->
 <div id="s-quiz" class="screen">
   <div class="app-header">
     <div class="logo">e<span>brew</span></div>
-    <div class="avatar-chip"><span class="avatar-chip-emoji" id="qa-emoji">🐉</span><span id="qa-name">Dino</span></div>
+    <div class="streak-chip">🔥 3 days</div>
   </div>
   <div class="quiz-topbar">
     <div class="q-back" onclick="goIntro()">←</div>
@@ -232,8 +291,7 @@ if('serviceWorker' in navigator){
   <div class="card">
     <div class="q-prompt">Which picture matches this Hebrew word?</div>
     <div class="heb-display" id="heb-display"></div>
-    <div class="hint-label">tap a sound to hear it</div>
-    <div class="syllable-row" id="syllable-row"></div>
+    <div class="hint-row"><button class="hint-btn" id="hint-btn" onclick="showHint()">💡 Hint</button><div class="hint-reveal" id="hint-reveal"></div></div>
   </div>
   <div class="choices" id="choices"></div>
   <div class="feedback-bar" id="feedback-bar"></div>
@@ -244,7 +302,7 @@ if('serviceWorker' in navigator){
 <div id="s-results" class="screen">
   <div class="app-header">
     <div class="logo">e<span>brew</span></div>
-    <div class="avatar-chip"><span class="avatar-chip-emoji" id="ra-emoji">🐉</span><span id="ra-name">Dino</span></div>
+    <div class="streak-chip">🔥 3 days</div>
   </div>
   <div class="card" style="text-align:center;">
     <span class="results-big-icon" id="r-icon"></span>
@@ -268,23 +326,15 @@ if('serviceWorker' in navigator){
 <div id="s-crossword" class="screen">
   <div class="app-header">
     <div class="logo">e<span>brew</span></div>
-    <div class="avatar-chip"><span class="avatar-chip-emoji" id="cwa-emoji">🐉</span><span id="cwa-name">Dino</span></div>
+    <div class="streak-chip">🔥 3 days</div>
   </div>
   <div class="cw-intro">
-    <div class="cw-tag">Word Puzzle</div>
+    <div class="cw-tag">Word Puzzle · תשבץ</div>
     <div class="cw-title">Spell it in Hebrew!</div>
-    <div class="cw-sub">Look at the picture clue and type the Hebrew word.</div>
+    <div class="cw-sub">Type each word using the keyboard below. All words stay on screen as you go.</div>
   </div>
 
-  <div class="cw-clue">
-    <div class="cw-num" id="cw-num">1</div>
-    <div class="cw-emoji-big" id="cw-emoji">🍕</div>
-    <div class="cw-right">
-      <div class="cw-prog" id="cw-prog">Word 1 of 5</div>
-      <div class="cw-boxes" id="cw-boxes"></div>
-    </div>
-  </div>
-
+  <div id="cw-all-words"></div>
   <div class="cw-bar empty" id="cw-bar">&nbsp;</div>
 
   <div class="heb-kb">
@@ -332,7 +382,7 @@ if('serviceWorker' in navigator){
 <div id="s-show" class="screen">
   <div class="app-header">
     <div class="logo">e<span>brew</span></div>
-    <div class="avatar-chip"><span class="avatar-chip-emoji" id="sa-emoji">🐉</span><span id="sa-name">Dino</span></div>
+    <div class="streak-chip">🔥 3 days</div>
   </div>
   <div style="text-align:center;margin-bottom:14px;">
     <div class="show-tag" id="show-tag">The food crew is here!</div>
@@ -341,7 +391,6 @@ if('serviceWorker' in navigator){
     <canvas class="stage-canvas" id="stage" width="358" height="210"></canvas>
     <div class="flash-tag flash-hit" id="flash-hit">Got it!</div>
     <div class="flash-tag flash-miss" id="flash-miss">Miss!</div>
-    <div class="av-bubble"><span id="st-av-emoji">🐉</span><span id="st-av-name">Dino</span></div>
   </div>
   <div class="speech-bubble" id="speech-bubble">Loading...</div>
   <div class="game-stats" id="game-stats" style="display:none">
@@ -401,19 +450,19 @@ function syncChips(){const c=CHARS[sel];[['qa-emoji','qa-name'],['ra-emoji','ra-
 
 /* ══ DATA ══ */
 const QS=[
-  {heb:'פִּיצָה',   answer:'Pizza',    icon:'🍕',plain:'פיצה',
+  {heb:'פִּיצָה',   answer:'Pizza',    icon:'🍕',plain:'פיצה',hint:'פ = P',
    syllables:[{text:'פִּי',sound:'פי'},{text:'צָה',sound:'צה'}],
    choices:[{l:'Pizza',icon:'🍕'},{l:'Sushi',icon:'🍣'},{l:'Burger',icon:'🍔'},{l:'Milkshake',icon:'🥤'}]},
-  {heb:'בּוּרְגֶּר', answer:'Burger',   icon:'🍔',plain:'בורגר',
+  {heb:'בּוּרְגֶּר', answer:'Burger',   icon:'🍔',plain:'בורגר',hint:'ב = B',
    syllables:[{text:'בּוּר',sound:'בור'},{text:'גֶּר',sound:'גר'}],
    choices:[{l:'Pizza',icon:'🍕'},{l:'Burger',icon:'🍔'},{l:'Chocolate',icon:'🍫'},{l:'Sushi',icon:'🍣'}]},
-  {heb:'סוּשִׁי',   answer:'Sushi',    icon:'🍣',plain:'סושי',
+  {heb:'סוּשִׁי',   answer:'Sushi',    icon:'🍣',plain:'סושי',hint:'ס = S',
    syllables:[{text:'סוּ',sound:'סו'},{text:'שִׁי',sound:'שי'}],
    choices:[{l:'Milkshake',icon:'🥤'},{l:'Burger',icon:'🍔'},{l:'Sushi',icon:'🍣'},{l:'Pizza',icon:'🍕'}]},
-  {heb:'שׁוֹקוֹלָד', answer:'Chocolate',icon:'🍫',plain:'שוקולד',
+  {heb:'שׁוֹקוֹלָד', answer:'Chocolate',icon:'🍫',plain:'שוקולד',hint:'ש = SH',
    syllables:[{text:'שׁוֹ',sound:'שו'},{text:'קוֹ',sound:'קו'},{text:'לָד',sound:'לד'}],
    choices:[{l:'Chocolate',icon:'🍫'},{l:'Sushi',icon:'🍣'},{l:'Pizza',icon:'🍕'},{l:'Burger',icon:'🍔'}]},
-  {heb:'מִילְקְשֵׁייק',answer:'Milkshake',icon:'🥤',plain:'מילקשייק',
+  {heb:'מִילְקְשֵׁייק',answer:'Milkshake',icon:'🥤',plain:'מילקשייק',hint:'מ = M',
    syllables:[{text:'מִיל',sound:'מיל'},{text:'קְשֵׁייק',sound:'קשייק'}],
    choices:[{l:'Burger',icon:'🍔'},{l:'Chocolate',icon:'🍫'},{l:'Pizza',icon:'🍕'},{l:'Milkshake',icon:'🥤'}]},
 ];
@@ -519,6 +568,14 @@ function speakSynth(syllableText) {
 
 let _ttsWorking = null; /* null=untested, true=works, false=fallback */
 
+function showHint(){
+  const q=QS[qIdx];
+  const rev=document.getElementById('hint-reveal');
+  rev.textContent=q.hint||'';
+  rev.classList.add('visible');
+  SFX.tap();
+}
+
 function speakHeb(text) {
   if (_ttsWorking === false) {
     speakWithAudio(text); return;
@@ -535,7 +592,9 @@ function speakHeb(text) {
   else _ttsWorking = false;
 }
 
-function startQuiz(){SFX.start();syncChips();pName=cap(document.getElementById('name-input').value.trim())||'superstar';qIdx=0;score=0;streak=0;best=0;answered=false;results=[];show('s-quiz');renderQ();}
+function goDay16(){const n=document.getElementById('home-name').value.trim();pName=cap(n)||'friend';show('s-intro');}
+
+function startQuiz(){SFX.start();syncChips();pName=pName||'superstar';qIdx=0;score=0;streak=0;best=0;answered=false;results=[];show('s-quiz');renderQ();}
 function restartQuiz(){qIdx=0;score=0;streak=0;best=0;answered=false;results=[];show('s-quiz');renderQ();}
 function renderQ(){
   const q=QS[qIdx];answered=false;
@@ -546,8 +605,7 @@ function renderQ(){
   document.getElementById('next-btn').classList.remove('show');
   const grid=document.getElementById('choices');grid.innerHTML='';
   q.choices.forEach(c=>{const btn=document.createElement('button');btn.className='choice';btn.innerHTML=`<span class="choice-icon">${c.icon}</span><span class="choice-label">${c.l}</span>`;btn.onclick=()=>{SFX.tap();pick(btn,c.l,q);};grid.appendChild(btn);});
-  const sylRow=document.getElementById('syllable-row');sylRow.innerHTML='';
-  (q.syllables||[]).forEach(s=>{const b=document.createElement('button');b.className='syl-btn';b.innerHTML=`<span class="syl-icon">🔊</span>${s.text}`;b.onclick=()=>speakHeb(s.sound);sylRow.appendChild(b);});
+  document.getElementById('hint-reveal').textContent='';document.getElementById('hint-reveal').classList.remove('visible');
 }
 function pick(btn,chosen,q){
   if(answered)return;answered=true;const ok=chosen===q.answer;
@@ -574,60 +632,120 @@ function showResults(){
 }
 
 /* CROSSWORD */
-function startCrossword(){cwIdx=0;cwTyped=[];syncChips();show('s-crossword');renderCW();}
-function renderCW(){
-  const q=QS[cwIdx];cwTyped=[];
-  document.getElementById('cw-num').textContent=cwIdx+1;
-  document.getElementById('cw-emoji').textContent=q.icon;
-  document.getElementById('cw-prog').textContent=`Word ${cwIdx+1} of ${QS.length}`;
-  document.getElementById('cw-bar').className='cw-bar empty';
-  document.getElementById('cw-bar').innerHTML='&nbsp;';
-  document.getElementById('cw-next-wrap').style.display='none';
-  drawBoxes(q);
+function startCrossword(){
+  cwIdx=0;cwTyped=[];syncChips();show('s-crossword');
+  buildAllWords();
+  activateRow(0);
 }
-function drawBoxes(q,state){
-  const wrap=document.getElementById('cw-boxes');wrap.innerHTML='';
+
+function buildAllWords(){
+  const wrap=document.getElementById('cw-all-words');wrap.innerHTML='';
+  QS.forEach((q,i)=>{
+    const row=document.createElement('div');
+    row.className='cw-word-row';row.id='cw-row-'+i;
+    row.innerHTML=`<div class="cw-row-num">${i+1}</div>
+      <div class="cw-row-emoji">${q.icon}</div>
+      <div class="cw-row-boxes" id="cw-row-boxes-${i}"></div>`;
+    wrap.appendChild(row);
+    renderRowBoxes(i,'empty');
+  });
+}
+
+function renderRowBoxes(idx,state){
+  const q=QS[idx];
+  const wrap=document.getElementById('cw-row-boxes-'+idx);
+  if(!wrap)return;
+  wrap.innerHTML='';
   const letters=[...q.plain];
+  const typed=(idx===cwIdx)?cwTyped:[];
   letters.forEach((ch,i)=>{
     const box=document.createElement('div');box.className='cw-box';
-    const typed=cwTyped[i]||'';
-    if(state==='correct'){box.classList.add('ok');box.textContent=ch;}
-    else if(state==='wrong'&&typed&&typed!==ch){box.classList.add('bad');box.textContent=typed;}
-    else{if(typed){box.classList.add('filled');box.textContent=typed;}if(i===cwTyped.length)box.classList.add('active');}
+    if(state==='correct'||state==='done'){box.classList.add('ok');box.textContent=ch;}
+    else if(state==='wrong'&&typed[i]&&typed[i]!==ch){box.classList.add('bad');box.textContent=typed[i];}
+    else{
+      if(typed[i]){box.classList.add('filled');box.textContent=typed[i];}
+      else if(i===typed.length&&idx===cwIdx)box.classList.add('active');
+    }
     wrap.appendChild(box);
   });
 }
-function kbPress(l){const q=QS[cwIdx];if(cwTyped.length>=[...q.plain].length)return;SFX.cwKey();cwTyped.push(l);drawBoxes(q);}
-function kbDel(){if(!cwTyped.length)return;SFX.tap();cwTyped.pop();drawBoxes(QS[cwIdx]);}
+
+function activateRow(idx){
+  document.querySelectorAll('.cw-word-row').forEach((r,i)=>{
+    r.classList.toggle('active-row',i===idx);
+  });
+  cwTyped=[];
+  renderRowBoxes(idx,'active');
+  document.getElementById('cw-bar').className='cw-bar empty';
+  document.getElementById('cw-bar').innerHTML='&nbsp;';
+  document.getElementById('cw-next-wrap').style.display='none';
+}
+
+function kbPress(l){
+  const q=QS[cwIdx];
+  if(cwTyped.length>=[...q.plain].length)return;
+  SFX.cwKey();cwTyped.push(l);
+  renderRowBoxes(cwIdx,'active');
+}
+
+function kbDel(){
+  if(!cwTyped.length)return;
+  SFX.tap();cwTyped.pop();
+  renderRowBoxes(cwIdx,'active');
+}
+
 function cwCheck(){
   const q=QS[cwIdx];const letters=[...q.plain];
   const bar=document.getElementById('cw-bar');
-  if(cwTyped.length<letters.length){bar.className='cw-bar hint';bar.textContent=`${letters.length-cwTyped.length} more letter${letters.length-cwTyped.length>1?'s':''} to go!`;return;}
+  if(cwTyped.length<letters.length){
+    bar.className='cw-bar hint';
+    bar.textContent=`${letters.length-cwTyped.length} more letter${letters.length-cwTyped.length>1?'s':''} to go!`;
+    return;
+  }
   const ok=cwTyped.every((l,i)=>l===letters[i]);
   if(ok){
-    SFX.cwCorrect();drawBoxes(q,'correct');bar.className='cw-bar correct';bar.textContent=`Yes! ${q.heb} — perfect! 🎉`;
+    SFX.cwCorrect();
+    renderRowBoxes(cwIdx,'correct');
+    document.getElementById('cw-row-'+cwIdx).classList.remove('active-row');
+    document.getElementById('cw-row-'+cwIdx).classList.add('done-row');
+    bar.className='cw-bar correct';
+    bar.textContent=`${q.heb} ✓`;
+    const isLast=cwIdx===QS.length-1;
     document.getElementById('cw-next-wrap').style.display='block';
-    document.getElementById('cw-next-btn').textContent=cwIdx<QS.length-1?'Next word →':'See the celebration! →';
+    document.getElementById('cw-next-btn').textContent=isLast?'🎉 See the celebration!':'Next word →';
   } else {
-    SFX.cwWrong();drawBoxes(q,'wrong');bar.className='cw-bar wrong';
+    SFX.cwWrong();
+    renderRowBoxes(cwIdx,'wrong');
+    bar.className='cw-bar wrong';
     const misses=cwTyped.filter((l,i)=>l!==letters[i]).length;
     bar.textContent=`${misses} letter${misses>1?'s':''} off — try again!`;
-    setTimeout(()=>{cwTyped=[];drawBoxes(q);},950);
+    setTimeout(()=>{cwTyped=[];renderRowBoxes(cwIdx,'active');},900);
   }
 }
+
 function cwSkip(){
-  SFX.tap();const q=QS[cwIdx];drawBoxes(q,'correct');
-  const bar=document.getElementById('cw-bar');bar.className='cw-bar hint';bar.textContent=`No worries — ${q.heb} = ${q.answer}. Keep going!`;
+  SFX.tap();
+  const q=QS[cwIdx];
+  cwTyped=[...q.plain];
+  renderRowBoxes(cwIdx,'correct');
+  document.getElementById('cw-row-'+cwIdx).classList.remove('active-row');
+  document.getElementById('cw-row-'+cwIdx).classList.add('done-row');
+  const bar=document.getElementById('cw-bar');
+  bar.className='cw-bar hint';bar.textContent=`${q.heb} = ${q.answer}`;
   document.getElementById('cw-next-wrap').style.display='block';
-  document.getElementById('cw-next-btn').textContent=cwIdx<QS.length-1?'Next word →':'See the celebration! →';
+  document.getElementById('cw-next-btn').textContent=cwIdx<QS.length-1?'Next word →':'🎉 See the celebration!';
 }
-function cwNext(){SFX.next();cwIdx++;if(cwIdx>=QS.length)startShow();else renderCW();}
+
+function cwNext(){
+  SFX.next();cwIdx++;
+  if(cwIdx>=QS.length)startShow();
+  else activateRow(cwIdx);
+}
 
 /* SHOW */
 function startShow(){
   show('s-show');spawnFoods();phase='intro';introStep=0;tick=0;
-  const c=CHARS[sel];
-  introLines=[c.intro(pName),`${pName}, you crushed Day 16!`,`The food crew heard everything...`,c.dance(),`They put together a little show just for you...`];
+  introLines=[`Nice work ${pName}! The food crew wants to celebrate — catch them if you can!`];
   document.getElementById('show-end').style.display='none';
   document.getElementById('game-stats').style.display='none';
   document.getElementById('tap-hint').style.display='none';
@@ -644,7 +762,7 @@ function runIntro(){
 }
 function startGame(){
   SFX.gameStart();phase='game';tapped=0;escaped=0;timeLeft=10;
-  foods.forEach(f=>{f.alive=true;f.popping=false;f.vx=(Math.random()>.5?1:-1)*(1.5+Math.random()*1.5);f.vy=-(1+Math.random()*1.2);f.av=(Math.random()-.5)*.08;});
+  foods.forEach((f,i)=>{f.alive=true;f.popping=false;f.scale=1;f.vx=(Math.random()>.5?1:-1)*(2+Math.random()*2);f.vy=-(1.2+Math.random()*1.5);f.av=(Math.random()-.5)*.12;});
   document.getElementById('show-tag').textContent='Catch them before they escape!';
   const gc=CHARS[sel];
   document.getElementById('speech-bubble').innerHTML=`<span style="font-size:18px">${gc.emoji}</span> ${gc.game()} Quick <span class="hi">${pName}</span> — tap every food!`;
@@ -694,7 +812,8 @@ function animate(){
     if(phase==='intro'||phase==='badge'){f.y=100+Math.sin(t*1.7+i*.9)*16;f.angle=Math.sin(t*1.4+i*.7)*.2;}
     else if(phase==='game'){f.x+=f.vx;f.y+=f.vy;f.vy+=.15;f.angle+=f.av;if(f.y>H-18){f.y=H-18;f.vy*=-.55;f.vx+=(Math.random()-.5)*.5;}if(f.x<20){f.x=20;f.vx=Math.abs(f.vx);}if(f.x>W-20){f.x=W-20;f.vx=-Math.abs(f.vx);}if(f.y<14){f.y=14;f.vy=Math.abs(f.vy)*.4;}}
     else if(phase==='result'){f.x+=f.vx*.5;f.vx*=.94;f.y=100+Math.sin(t*2+i)*10;f.angle=Math.sin(t+i*.8)*.15;}
-    c.save();c.translate(f.x,f.y);c.rotate(f.angle);c.font='34px serif';c.textAlign='center';c.textBaseline='middle';c.fillText(f.emoji,0,0);
+    const fScale=(phase==='game')?Math.max(0.6,1-(10-timeLeft)*0.04):1;
+    c.save();c.translate(f.x,f.y);c.rotate(f.angle);c.scale(fScale,fScale);c.font='34px serif';c.textAlign='center';c.textBaseline='middle';c.fillText(f.emoji,0,0);
     if(phase==='intro'||phase==='badge'){c.font='500 10px -apple-system,sans-serif';c.fillStyle='#534AB7';c.fillText(f.heb,0,26);}
     c.restore();
   });
@@ -704,7 +823,7 @@ function animate(){
   raf=requestAnimationFrame(animate);
 }
 
-document.getElementById('name-input').addEventListener('keydown',e=>{if(e.key==='Enter')startQuiz();});
+document.getElementById('home-name').addEventListener('keydown',e=>{if(e.key==='Enter')goDay16();});
 </script>
 </body>
 </html>
