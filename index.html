@@ -133,16 +133,16 @@
 
   /* CROSSWORD */
 
-  .cw-word-row{display:flex;align-items:center;gap:10px;padding:10px 14px;
+  .cw-word-row{display:flex;align-items:center;gap:8px;padding:7px 10px;
     background:white;border:1px solid #E8E5DC;border-radius:var(--rl);
-    margin-bottom:8px;transition:border-color .2s,background .2s;}
+    margin-bottom:6px;transition:border-color .2s,background .2s;}
   .cw-word-row.active-row{border-color:var(--purple-400);background:var(--purple-50);}
   .cw-word-row.done-row{border-color:var(--green-600);background:var(--green-50);opacity:.75;}
-  .cw-row-emoji{font-size:28px;flex-shrink:0;width:36px;text-align:center;}
+  .cw-row-emoji{font-size:22px;flex-shrink:0;width:28px;text-align:center;}
   .cw-row-boxes{display:flex;direction:rtl;gap:4px;flex:1;flex-wrap:wrap;}
-  .cw-box{width:32px;height:38px;border:2px solid #E8E5DC;border-radius:7px;
+  .cw-box{width:26px;height:32px;border:2px solid #E8E5DC;border-radius:6px;
     display:flex;align-items:center;justify-content:center;
-    font-size:18px;direction:rtl;color:#2C2C2A;font-weight:700;
+    font-size:15px;direction:rtl;color:#2C2C2A;font-weight:700;
     transition:border-color .15s,background .15s;}
   .cw-box.filled{border-color:var(--purple-400);background:var(--purple-50);}
   .cw-box.active{border-color:var(--teal-400);background:var(--teal-50);}
@@ -150,7 +150,7 @@
   .cw-box.bad{border-color:var(--red-600);background:var(--red-50);}
   .cw-row-num{font-size:11px;font-weight:700;color:var(--gray-400);width:16px;flex-shrink:0;text-align:center;}
 
-  .cw-intro{text-align:center;margin-bottom:20px;}
+  .cw-intro{text-align:center;margin-bottom:10px;}
   .cw-tag{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;background:var(--teal-50);color:var(--teal-800);border:1px solid #9FE1CB;border-radius:99px;padding:4px 12px;margin-bottom:8px;}
   .cw-title{font-size:22px;font-weight:700;color:#2C2C2A;margin-bottom:4px;}
   .cw-sub{font-size:13px;color:var(--gray-400);line-height:1.5;}
@@ -167,23 +167,26 @@
   .cw-box.ok{border-color:var(--green-600);background:var(--green-50);color:var(--green-800);}
   .cw-box.bad{border-color:var(--red-600);background:var(--red-50);}
 
-  .cw-bar{border-radius:var(--rm);padding:10px 14px;font-size:13px;line-height:1.5;margin-bottom:12px;min-height:40px;}
+  .cw-bar{border-radius:var(--rm);padding:7px 12px;font-size:12px;line-height:1.4;margin-bottom:8px;min-height:32px;}
   .cw-bar.correct{background:var(--green-50);color:var(--green-800);}
   .cw-bar.wrong{background:var(--red-50);color:var(--red-800);}
   .cw-bar.hint{background:var(--purple-50);color:var(--purple-800);}
   .cw-bar.empty{background:transparent;}
 
   /* HEBREW KEYBOARD */
-  .heb-kb{background:white;border:1px solid #E8E5DC;border-radius:var(--rxl);padding:12px 8px 10px;margin-bottom:14px;}
-  .kb-row{display:flex;justify-content:center;gap:4px;margin-bottom:4px;}
-  .kb-key{min-width:0;height:44px;padding:0;background:#F7F5F0;border:1px solid #E0DDD5;border-radius:8px;font-size:18px;direction:rtl;font-family:var(--sans);color:#2C2C2A;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:1;transition:background .1s,transform .08s;-webkit-user-select:none;user-select:none;}
+  .heb-kb{background:white;border:1px solid #E8E5DC;border-radius:var(--rxl);padding:8px 6px 6px;margin-bottom:8px;}
+  .kb-row{display:flex;justify-content:center;gap:3px;margin-bottom:3px;}
+  .kb-key{min-width:0;height:36px;padding:0;background:#F7F5F0;border:1px solid #E0DDD5;border-radius:7px;font-size:15px;direction:rtl;font-family:var(--sans);color:#2C2C2A;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:1;transition:background .1s,transform .08s;-webkit-user-select:none;user-select:none;}
   .kb-key:hover{background:var(--purple-50);border-color:var(--purple-200);}
   .kb-key:active{transform:scale(.9);background:var(--purple-100);}
-  .kb-del{background:#EDEAE2;font-size:14px;color:var(--gray-400);max-width:46px;}
+  .kb-key.kb-lit{background:#7F77DD;border-color:#534AB7;color:white;font-weight:700;}
+  .kb-key.kb-lit:hover{background:#534AB7;}
+
+  .kb-del{background:#EDEAE2;font-size:12px;color:var(--gray-400);max-width:38px;}
   .kb-del:hover{background:#E0DDD5;}
-  .kb-check{background:var(--teal-400);border-color:var(--teal-600);color:white;font-size:12px;font-weight:700;max-width:58px;letter-spacing:.02em;}
+  .kb-check{background:var(--teal-400);border-color:var(--teal-600);color:white;font-size:11px;font-weight:700;max-width:50px;letter-spacing:.02em;}
   .kb-check:hover{background:var(--teal-600);}
-  .kb-skip{background:#EDEAE2;border-color:#D8D5CC;color:var(--gray-400);font-size:11px;font-weight:700;max-width:46px;letter-spacing:.02em;}
+  .kb-skip{background:#EDEAE2;border-color:#D8D5CC;color:var(--gray-400);font-size:10px;font-weight:700;max-width:40px;letter-spacing:.02em;}
   .kb-skip:hover{background:#E0DDD5;}
 
   /* SHOW */
@@ -373,7 +376,7 @@
     </div>
   </div>
 
-  <div id="cw-next-wrap" style="display:none;">
+  <div id="cw-next-wrap" style="display:none;margin-top:6px;">
     <button class="cta-btn" id="cw-next-btn" onclick="cwNext()"></button>
   </div>
 </div>
@@ -470,7 +473,7 @@ const FC=[{emoji:'🍕',heb:'פִּיצָה'},{emoji:'🍔',heb:'בּוּרְג�
 
 /* ══ STATE ══ */
 let pName='superstar',qIdx=0,score=0,streak=0,best=0,answered=false,results=[];
-let cwIdx=0,cwTyped=[];
+let cwIdx=0,cwTyped=[],cwTries=0;
 let foods=[],phase='intro',introStep=0,introLines=[],tapped=0,escaped=0,timeLeft=10,cd=null,raf=null,tick=0;
 const CV=()=>document.getElementById('stage');
 const CX=()=>CV().getContext('2d');
@@ -674,11 +677,27 @@ function activateRow(idx){
   document.querySelectorAll('.cw-word-row').forEach((r,i)=>{
     r.classList.toggle('active-row',i===idx);
   });
-  cwTyped=[];
+  cwTyped=[];cwTries=0;
+  clearKbHighlight();
   renderRowBoxes(idx,'active');
   document.getElementById('cw-bar').className='cw-bar empty';
   document.getElementById('cw-bar').innerHTML='&nbsp;';
   document.getElementById('cw-next-wrap').style.display='none';
+}
+
+
+function clearKbHighlight(){
+  document.querySelectorAll('.kb-key').forEach(b=>{
+    b.classList.remove('kb-lit');
+  });
+}
+
+function highlightKbWord(word){
+  clearKbHighlight();
+  const letters=new Set([...word]);
+  document.querySelectorAll('.kb-key').forEach(b=>{
+    if(letters.has(b.textContent.trim()))b.classList.add('kb-lit');
+  });
 }
 
 function kbPress(l){
@@ -705,6 +724,7 @@ function cwCheck(){
   const ok=cwTyped.every((l,i)=>l===letters[i]);
   if(ok){
     SFX.cwCorrect();
+    clearKbHighlight();
     renderRowBoxes(cwIdx,'correct');
     document.getElementById('cw-row-'+cwIdx).classList.remove('active-row');
     document.getElementById('cw-row-'+cwIdx).classList.add('done-row');
@@ -715,16 +735,23 @@ function cwCheck(){
     document.getElementById('cw-next-btn').textContent=isLast?'🎉 See the celebration!':'Next word →';
   } else {
     SFX.cwWrong();
+    cwTries++;
     renderRowBoxes(cwIdx,'wrong');
     bar.className='cw-bar wrong';
     const misses=cwTyped.filter((l,i)=>l!==letters[i]).length;
-    bar.textContent=`${misses} letter${misses>1?'s':''} off — try again!`;
+    if(cwTries>=3){
+      bar.textContent=`The letters are highlighted on the keyboard — look for ${q.heb}!`;
+      highlightKbWord(q.plain);
+    } else {
+      bar.textContent=`${misses} letter${misses>1?'s':''} off — try ${3-cwTries} more time${3-cwTries>1?'s':''}!`;
+    }
     setTimeout(()=>{cwTyped=[];renderRowBoxes(cwIdx,'active');},900);
   }
 }
 
 function cwSkip(){
   SFX.tap();
+  clearKbHighlight();
   const q=QS[cwIdx];
   cwTyped=[...q.plain];
   renderRowBoxes(cwIdx,'correct');
@@ -745,7 +772,7 @@ function cwNext(){
 /* SHOW */
 function startShow(){
   show('s-show');spawnFoods();phase='intro';introStep=0;tick=0;
-  introLines=[`Nice work ${pName}! The food crew wants to celebrate — catch them if you can!`];
+  introLines=[`Nice work ${pName}! The food crew wants to celebrate — catch them if you can! 🎉`];
   document.getElementById('show-end').style.display='none';
   document.getElementById('game-stats').style.display='none';
   document.getElementById('tap-hint').style.display='none';
@@ -764,8 +791,7 @@ function startGame(){
   SFX.gameStart();phase='game';tapped=0;escaped=0;timeLeft=10;
   foods.forEach((f,i)=>{f.alive=true;f.popping=false;f.scale=1;f.vx=(Math.random()>.5?1:-1)*(2+Math.random()*2);f.vy=-(1.2+Math.random()*1.5);f.av=(Math.random()-.5)*.12;});
   document.getElementById('show-tag').textContent='Catch them before they escape!';
-  const gc=CHARS[sel];
-  document.getElementById('speech-bubble').innerHTML=`<span style="font-size:18px">${gc.emoji}</span> ${gc.game()} Quick <span class="hi">${pName}</span> — tap every food!`;
+  document.getElementById('speech-bubble').innerHTML=`Quick <span class="hi">${pName}</span> — tap every food before they escape!`;
   document.getElementById('game-stats').style.display='grid';
   document.getElementById('tap-hint').style.display='block';
   updateStats();CV().onclick=handleTap;CV().style.cursor='crosshair';
@@ -786,8 +812,8 @@ function endGame(){
   const won=tapped>=4;if(won)SFX.win();else SFX.lose();
   document.getElementById('tap-hint').style.display='none';
   document.getElementById('show-tag').textContent=won?'Food crew approves! 🎊':'So close!';
-  const ec=CHARS[sel];
-  document.getElementById('speech-bubble').innerHTML=(won?ec.cheer(pName):ec.miss(pName)).replace(pName,`<span class="hi">${pName}</span>`);
+  const wonMsg=won?`Amazing, <span class="hi">${pName}</span>! You caught ${tapped} foods! 🎊`:`You got ${tapped}! So close, <span class="hi">${pName}</span>! Try again?`;
+  document.getElementById('speech-bubble').innerHTML=wonMsg;
   document.getElementById('show-end').style.display='block';
   if(won){document.getElementById('badge-icon').textContent='🥇';document.getElementById('badge-title').textContent='World 4 badge unlocked!';document.getElementById('badge-sub').textContent=`You finished Day 16 and caught the food crew, ${pName}! Come back tomorrow for sports words.`;document.getElementById('end-cta').textContent='Claim badge & finish →';document.getElementById('end-cta').dataset.action='badge';}
   else{document.getElementById('badge-icon').textContent='🎯';document.getElementById('badge-title').textContent='Almost had them!';document.getElementById('badge-sub').textContent=`You caught ${tapped} out of 5. Try again?`;document.getElementById('end-cta').textContent='Try the game again →';document.getElementById('end-cta').dataset.action='retry';}
@@ -796,8 +822,7 @@ function handleEndCta(){const a=document.getElementById('end-cta').dataset.actio
 function showBadge(){
   SFX.badge();phase='badge';CV().onclick=null;
   document.getElementById('show-tag').textContent='Day 16 complete!';
-  const bc=CHARS[sel];
-  document.getElementById('speech-bubble').innerHTML=`${bc.emoji} See you tomorrow, <span class="hi">${pName}</span>! ${bc.name} and the food crew will miss you! 👋`;
+  document.getElementById('speech-bubble').innerHTML=`See you tomorrow, <span class="hi">${pName}</span>! The food crew will miss you! 👋`;
   document.getElementById('game-stats').style.display='none';document.getElementById('show-end').style.display='none';
   foods.forEach((f,i)=>{f.alive=true;f.popping=false;f.vx=0;f.vy=0;f.x=36+i*60;f.y=105;});
   setTimeout(()=>{document.getElementById('show-end').style.display='block';document.getElementById('badge-icon').textContent='🎊';document.getElementById('badge-title').textContent='See you on Day 17!';document.getElementById('badge-sub').textContent='Tomorrow: sports words — goal, ball, team, champion. The crew will be waiting!';document.getElementById('end-cta').textContent='Go to Day 17 →';document.getElementById('end-cta').dataset.action='next';},2500);
@@ -817,8 +842,7 @@ function animate(){
     if(phase==='intro'||phase==='badge'){c.font='500 10px -apple-system,sans-serif';c.fillStyle='#534AB7';c.fillText(f.heb,0,26);}
     c.restore();
   });
-  const av=CHARS[sel],avT=tick*.05,avX=W-28,avY=22+Math.sin(avT*2.2)*6,avA=Math.sin(avT*1.8)*.18;
-  c.save();c.translate(avX,avY);c.rotate(phase==='game'?avA*2:avA);c.font=phase==='result'?'32px serif':'24px serif';c.textAlign='center';c.textBaseline='middle';c.fillText(av.emoji,0,0);c.restore();
+  /* avatar hidden — const av=CHARS[sel]; */
   if(phase==='game'){const alive=foods.filter(f=>f.alive&&!f.popping).length;if(alive===0&&tapped+escaped<FC.length){escaped=FC.length-tapped;clearInterval(cd);timeLeft=0;updateStats();endGame();}}
   raf=requestAnimationFrame(animate);
 }
